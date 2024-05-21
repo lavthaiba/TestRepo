@@ -1,0 +1,25 @@
+<html>
+<body>
+<h1 style="color:green">Your registration has been successful</h1>
+<h3 id="countdown"></h3>
+<script type="text/javascript">
+ var timeleft = 4;
+  var downloadTimer = setInterval(function(){
+    if(timeleft <= 0){
+      clearInterval(downloadTimer);
+      document.getElementById("countdown").innerHTML = "Finished";
+    } else {
+      document.getElementById("countdown").innerHTML = "Redirecting to home page within " + timeleft + " seconds ";
+    }
+    timeleft -= 1;
+  }, 1000);
+
+
+setTimeout(function () {
+    window.location = "index.html";
+}, 5000);
+
+
+</script>
+</body>
+<html>

@@ -1,0 +1,106 @@
+body {
+background-image: url("images/qabg3.png");
+background-size: cover;
+background-color: rgb(165, 159, 150);
+margin: 2%;
+}
+
+#submitBtn {
+padding-left:88%;
+}
+
+input#name{
+margin-left:14.8%;	
+}
+
+input#age {
+margin-left:17.6%;	
+}
+
+select#country {
+margin-left:12.9%;
+width:13.3em;
+}
+
+input#phone{
+margin-left:1.6%;
+}
+
+
+textarea#describe{
+	margin-left:0;
+}
+
+h2 {
+	text-align: center;
+	color: #003800;
+	text-shadow: 2px 2px 18px #ffc800;
+}
+
+input#currentBalance{
+/**text-align: center;*//
+font-weight: bold;
+margin-left: 12%;
+font-weight: bold;
+background-color:#000;
+border-color: #c2c2c2;
+color:green;
+font-size:1em;
+width: 10em;
+
+}
+
+input#withdrawAmount {
+/**text-align: center;**/
+font-weight: bold;
+margin-left:1.5%;
+width: 12em;
+
+}
+
+p#text1 {
+/**text-align: center;**/
+font-weight: bold;
+color: #003800;
+text-shadow: 2px 2px 18px #00c121;
+}
+
+p#text2 {
+/**text-align: center;**/
+font-weight: bold;
+color: #003800;
+text-shadow: 2px 2px 18px #00c121;
+}
+
+p#resultMsg {
+/**text-align: center;**/
+font-weight: bold;
+font-size:1.2em;
+color: #003800;
+text-shadow: 2px 2px 18px #00c121;
+}
+
+p#errorMsg {
+/**text-align: center;*//
+font-weight: bold;
+}
+
+button#withdraw {
+margin-left: 21em;
+}
+
+textarea {
+resize: none;
+}
+
+#main {
+	float:left;
+}
+
+#secondMain {
+	float:right;
+}
+#divider {
+	float: left;
+	padding-right: 8em;
+}
