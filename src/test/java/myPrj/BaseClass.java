@@ -1,5 +1,6 @@
 package myPrj;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
@@ -11,6 +12,11 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.Reporter;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
+
+import com.aventstack.extentreports.ExtentReports;
+import com.aventstack.extentreports.ExtentTest;
+import com.aventstack.extentreports.Status;
+import com.aventstack.extentreports.reporter.ExtentSparkReporter;
 import io.github.bonigarcia.wdm.WebDriverManager;
 
 
@@ -18,6 +24,15 @@ public class BaseClass {
 	
 	static WebDriver driver;
 	Properties prop;
+	static ExtentReports extent;
+	ExtentTest test;
+	
+	static {
+        extent = new ExtentReports();
+        ExtentSparkReporter spark = new ExtentSparkReporter(getExtentReportFilePath());
+        extent.attachReporter(spark);
+    }
+ 
 	
 	@BeforeMethod
 	public void setUp() {
@@ -26,7 +41,7 @@ public class BaseClass {
 		
 		prop = new Properties();
         InputStream inputStream = getClass().getClassLoader().getResourceAsStream("config.properties");
-
+        
         try {
         	if (inputStream != null) {
                 prop.load(inputStream);
@@ -84,11 +99,24 @@ public class BaseClass {
 	
 	}
 	
+	
+
+	  private static String getExtentReportFilePath() {
+	        String reportFileName = "ExtentReport.html";
+	        return new File("test-output", reportFileName).getAbsolutePath();
+	    }
+	  
+		/*
+		 * protected void logTestStep(Status status, String message) { test.log(status,
+		 * message); }
+		 */
+	
 	@AfterMethod
 	public void tearDown() {
 		
 		Reporter.log("==BROWSER SESSION END==", true);
 		driver.close();
+		extent.flush();
 		
 	}
 

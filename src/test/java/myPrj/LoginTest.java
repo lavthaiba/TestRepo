@@ -5,6 +5,8 @@ import static org.testng.Assert.assertEquals;
 import org.testng.Reporter;
 import org.testng.annotations.Test;
 
+import com.aventstack.extentreports.Status;
+
 import pagerepo.DashboardPage;
 import pagerepo.LoginPage;
 
@@ -27,6 +29,8 @@ public class LoginTest extends BaseClass{
 		//System.out.println(actualDashboardText);
 		String expectedDashboardText = "Dashboard";
 		assertEquals(actualDashboardText, expectedDashboardText);
+		test= extent.createTest("Valid Login Case");
+		test.log(Status.PASS, "Test Passed with successful Login");
 		Reporter.log("==Login Test case Verified==", true);
 		
 	}

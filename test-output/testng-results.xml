@@ -14,12 +14,12 @@
       <![CDATA[==BROWSER SESSION END==]]>
     </line>
   </reporter-output>
-  <suite started-at="2024-05-21T20:34:29 NPT" name="Default suite" finished-at="2024-05-21T20:34:36 NPT" duration-ms="6720">
+  <suite started-at="2024-05-22T12:48:32 NPT" name="Default suite" finished-at="2024-05-22T12:48:38 NPT" duration-ms="6095">
     <groups>
     </groups>
-    <test started-at="2024-05-21T20:34:29 NPT" name="Default test" finished-at="2024-05-21T20:34:36 NPT" duration-ms="6720">
+    <test started-at="2024-05-22T12:48:32 NPT" name="Default test" finished-at="2024-05-22T12:48:38 NPT" duration-ms="6095">
       <class name="myPrj.LoginTest">
-        <test-method is-config="true" signature="setUp()[pri:0, instance:myPrj.LoginTest@2b30a42c]" started-at="2024-05-21T20:34:30 NPT" name="setUp" finished-at="2024-05-21T20:34:34 NPT" duration-ms="4823" status="PASS">
+        <test-method is-config="true" signature="setUp()[pri:0, instance:myPrj.LoginTest@32c4e8b2]" started-at="2024-05-22T12:48:32 NPT" name="setUp" finished-at="2024-05-22T12:48:35 NPT" duration-ms="3568" status="PASS">
           <reporter-output>
             <line>
               <![CDATA[====BROWSER SESSION STARTED====]]>
@@ -29,14 +29,14 @@
             </line>
           </reporter-output>
         </test-method> <!-- setUp -->
-        <test-method signature="loginValid()[pri:1, instance:myPrj.LoginTest@2b30a42c]" started-at="2024-05-21T20:34:34 NPT" name="loginValid" description="This testcase verifies successful Login" finished-at="2024-05-21T20:34:36 NPT" duration-ms="1690" status="PASS">
+        <test-method signature="loginValid()[pri:1, instance:myPrj.LoginTest@32c4e8b2]" started-at="2024-05-22T12:48:35 NPT" name="loginValid" description="This testcase verifies successful Login" finished-at="2024-05-22T12:48:37 NPT" duration-ms="1813" status="PASS">
           <reporter-output>
             <line>
               <![CDATA[==Login Test case Verified==]]>
             </line>
           </reporter-output>
         </test-method> <!-- loginValid -->
-        <test-method is-config="true" signature="tearDown()[pri:0, instance:myPrj.LoginTest@2b30a42c]" started-at="2024-05-21T20:34:36 NPT" name="tearDown" finished-at="2024-05-21T20:34:36 NPT" duration-ms="147" status="PASS">
+        <test-method is-config="true" signature="tearDown()[pri:0, instance:myPrj.LoginTest@32c4e8b2]" started-at="2024-05-22T12:48:37 NPT" name="tearDown" finished-at="2024-05-22T12:48:38 NPT" duration-ms="656" status="PASS">
           <reporter-output>
             <line>
               <![CDATA[==BROWSER SESSION END==]]>
