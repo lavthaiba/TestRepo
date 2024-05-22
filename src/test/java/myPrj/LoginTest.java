@@ -19,7 +19,7 @@ public class LoginTest extends BaseClass{
 		
 	
 	
-	@Test(priority=1, description="This testcase verifies successful Login")
+	@Test(priority=1, description="Testcase - To Verify Successful Login")
 	public void loginValid() {
 		
 		LoginPage login = new LoginPage(driver);

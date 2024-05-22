@@ -7,10 +7,11 @@ package myPrj;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.time.Duration;
 import java.util.Properties;
-import java.util.concurrent.TimeUnit;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.Reporter;
@@ -19,7 +20,6 @@ import org.testng.annotations.BeforeMethod;
 
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
-import com.aventstack.extentreports.Status;
 import com.aventstack.extentreports.reporter.ExtentSparkReporter;
 import io.github.bonigarcia.wdm.WebDriverManager;
 
@@ -27,9 +27,12 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 public class BaseClass {
 	
 	static WebDriver driver;
-	Properties prop;
+	static Properties prop;
 	static ExtentReports extent;
-	ExtentTest test;
+	static ExtentTest test;
+	static String browserChoice;
+	static String baseUrl;
+	
 	
 	static {
         extent = new ExtentReports();
@@ -57,23 +60,25 @@ public class BaseClass {
         }
 
 
-        String browserChoice = prop.getProperty("browser");
-        String baseUrl = prop.getProperty("baseUrl");
-        String otherUrl = prop.getProperty("otherUrl");	
-				
-        while (browserChoice == null) {
-        	
-        	browserChoice = browserChoice;
-        }
+        browserChoice = prop.getProperty("browser");
+        baseUrl = prop.getProperty("baseUrl");
         
+		/*
+		 * while (browserChoice == null) {
+		 * 
+		 * browserChoice = browserChoice; }
+		 */
 	switch(browserChoice) {
 	
 	case "chrome": 
 			Reporter.log("===STARTING WITH CHROME BROWSER===", true);
-			WebDriverManager.chromedriver().setup();
-			driver= new ChromeDriver();
+			WebDriverManager.chromedriver().setup();		
+			ChromeOptions options = new ChromeOptions();
+			options.addArguments("--remote-allow-origins=*");
+			driver = new ChromeDriver(options);
 			driver.manage().window().maximize();
-			driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+			//driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+			driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 			driver.get(baseUrl);
 			break;
 			
@@ -82,7 +87,8 @@ public class BaseClass {
 			WebDriverManager.firefoxdriver().setup();
 			driver= new FirefoxDriver();
 			driver.manage().window().maximize();
-			driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+			//driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+			driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 			driver.get(baseUrl);
 			break;
 	
@@ -92,7 +98,8 @@ public class BaseClass {
 			WebDriverManager.edgedriver().setup();
 			driver= new EdgeDriver();
 			driver.manage().window().maximize();
-			driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+			//driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+			driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 			driver.get(baseUrl);
 			break;
 			
