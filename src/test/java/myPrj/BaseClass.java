@@ -9,11 +9,18 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.time.Duration;
 import java.util.Properties;
+import java.util.logging.Level;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.logging.LogEntries;
+import org.openqa.selenium.logging.LogEntry;
+import org.openqa.selenium.logging.LogType;
+import org.openqa.selenium.logging.LoggingPreferences;
+import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.Reporter;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -32,6 +39,7 @@ public class BaseClass {
 	static ExtentTest test;
 	static String browserChoice;
 	static String baseUrl;
+	static String demoTestUrl;
 	
 	
 	static {
@@ -47,7 +55,8 @@ public class BaseClass {
 		Reporter.log("====BROWSER SESSION STARTED====", true);
 		
 		prop = new Properties();
-        InputStream inputStream = getClass().getClassLoader().getResourceAsStream("config.properties");
+        InputStream inputStream;
+        inputStream = getClass().getClassLoader().getResourceAsStream("config.properties");
         
         try {
         	if (inputStream != null) {
@@ -62,6 +71,7 @@ public class BaseClass {
 
         browserChoice = prop.getProperty("browser");
         baseUrl = prop.getProperty("baseUrl");
+      //  demoTestUrl = prop.getProperty("demoTestUrl");
         
 		/*
 		 * while (browserChoice == null) {
@@ -75,11 +85,28 @@ public class BaseClass {
 			WebDriverManager.chromedriver().setup();		
 			ChromeOptions options = new ChromeOptions();
 			options.addArguments("--remote-allow-origins=*");
+			options.addArguments("--disable notifications");
+			DesiredCapabilities cp = new DesiredCapabilities();
+			cp.setCapability(ChromeOptions.CAPABILITY, options);
+			options.merge(cp);
+			// Set logging preferences
+			/*
+			 * LoggingPreferences logPrefs = new LoggingPreferences();
+			 * logPrefs.enable(LogType.BROWSER, Level.ALL);
+			 * options.setCapability("goog:loggingPrefs", logPrefs);
+			 */
 			driver = new ChromeDriver(options);
 			driver.manage().window().maximize();
 			//driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-			driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+			driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
+			
 			driver.get(baseUrl);
+			
+			//driver.get(demoTestUrl);
+			/*
+			 * if (demoTestUrl != null && !demoTestUrl.isEmpty()) { driver.get(demoTestUrl);
+			 * } else { System.out.println("Demo Test URL is not set!"); }
+			 */
 			break;
 			
 	case "firefox": 
@@ -123,11 +150,19 @@ public class BaseClass {
 		 */
 	
 	@AfterMethod
-	public void tearDown() {
+	public void tearDown() {		
 		
-		Reporter.log("==BROWSER SESSION END==", true);
-		driver.close();
-		extent.flush();
+		if (driver != null) {
+	
+			Reporter.log("==BROWSER SESSION END==", true);
+        	LogEntries logs = driver.manage().logs().get(LogType.BROWSER);
+            for (LogEntry entry : logs) {
+                System.out.println(entry.getLevel() + " " + entry.getMessage());
+            }
+            
+    		driver.quit();
+    		extent.flush();
+        }
 		
 	}
 

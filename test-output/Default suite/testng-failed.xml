@@ -3,11 +3,13 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="formexercise.CreateForm">
+      <class name="myPrj.HandlePopup">
         <methods>
-          <include name="checkRegisterAndLoginFlow"/>
+          <include name="setUp"/>
+          <include name="testPopUpWithText"/>
+          <include name="tearDown"/>
         </methods>
-      </class> <!-- formexercise.CreateForm -->
+      </class> <!-- myPrj.HandlePopup -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->
